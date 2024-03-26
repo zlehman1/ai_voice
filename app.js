@@ -4,10 +4,10 @@ const express = require('express');
 const ExpressWs = require('express-ws');
 const path = require('path');
 
-const { GptService } = require('./services/gpt-service');
-const { StreamService } = require('./services/stream-service');
-const { TranscriptionService } = require('./services/transcription-service');
-const { TextToSpeechService } = require('./services/tts-service');
+const { GptService } = require('services/gpt-service');
+const { StreamService } = require('services/stream-service');
+const { TranscriptionService } = require('services/transcription-service');
+const { TextToSpeechService } = require('services/tts-service');
 
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
