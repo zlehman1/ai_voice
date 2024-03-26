@@ -12,7 +12,7 @@ const { TextToSpeechService } = require('./services/tts-service');
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const app = express();
-// ExpressWs(app);
+ExpressWs(app);
 
 // Set the directory for static files (like CSS, images, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
