@@ -28,7 +28,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 // // Make a call
-function makeACall() {
+function makeACall(toNumber) {
   console.log("Making a call")
   const calls = client.calls.create({
     twiml: `<Response>
@@ -36,7 +36,7 @@ function makeACall() {
     <Stream url="wss://${process.env.SERVER}/connection" />
   </Connect>
   </Response>`,
-  to: process.env.YOUR_NUMBER,
+  to: toNumber,
   from: process.env.FROM_NUMBER,
   // record: true
 });
@@ -76,7 +76,7 @@ app.post("/set_prompt", async (req, res) => {
   // Setting the GPT prompt
   gptService.setPrompt(prompt)
 
-  await makeACall()
+  await makeACall(phone)
 
   res.send(true)
 })
