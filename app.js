@@ -28,7 +28,7 @@ function makeACall() {
   const calls = client.calls.create({
     twiml: `<Response>
     <Connect>
-    <Stream url="wss://${process.env.SERVER}/connection" />
+    <Stream url="wss://ai-voice-three.vercel.app/connection" />
   </Connect>
   </Response>`,
   to: process.env.YOUR_NUMBER,
@@ -44,7 +44,7 @@ app.post('/incoming', (req, res) => {
   res.end(`
   <Response>
     <Connect>
-      <Stream url="wss://${process.env.SERVER}/connection" />
+      <Stream url="wss://ai-voice-three.vercel.app/connection" />
     </Connect>
   </Response>
   `);
@@ -69,6 +69,9 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'templates', 'index.html'));
 });
 
+app.get('/test', (req, res) => {
+  res.send("Hello!");
+});
 app.ws('/connection', (ws) => {
   ws.on('error', console.error);
   // Filled in from start message
