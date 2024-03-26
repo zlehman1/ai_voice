@@ -12,7 +12,7 @@ const { TranscriptionService } = require('./services/transcription-service');
 const { TextToSpeechService } = require('./services/tts-service');
 
 var mongourl = process.env.MONGODB_URL;
-const mongoclient = new MongoClient(mongourl);
+const mongoclient = new MongoClient(mongourl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
