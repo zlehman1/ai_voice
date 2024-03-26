@@ -28,7 +28,7 @@ function makeACall() {
   const calls = client.calls.create({
     twiml: `<Response>
     <Connect>
-    <Stream url="wss://ai-voice-three.vercel.app/connection" />
+    <Stream url="wss://ai-voice-7ox7.onrender.com/connection" />
   </Connect>
   </Response>`,
   to: process.env.YOUR_NUMBER,
@@ -44,7 +44,7 @@ app.post('/incoming', (req, res) => {
   res.end(`
   <Response>
     <Connect>
-      <Stream url="wss://ai-voice-three.vercel.app/connection" />
+      <Stream url="wss://ai-voice-7ox7.onrender.com/connection" />
     </Connect>
   </Response>
   `);
