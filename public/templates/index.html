@@ -246,7 +246,7 @@
                                         <div class="hero_form-block w-form">
                                             <form id="prompt-form" name="prompt-form" data-name="Prompt Form" method="post" class="hero_form">
                                                 <textarea required class="form-input is-hero w-input promptText" placeholder="Enter your prompt here" name="" id="" cols="30" rows="5"></textarea><br>
-                                                <input type="submit" value="Get a call from AI agent" data-wait="Please wait..." class="button background-color-primary w-button"/>
+                                                <input type="submit" value="Get a call from AI agent" data-wait="Please wait..." class="button background-color-primary w-button submitButton"/>
                                             </form>
                                             <div class="text-size-tiny text-style-muted">
                                                 <!-- By clicking Sign Up you&#x27;re confirming that you agree with our <a href="#" class="text-link">TOS.</a> -->
@@ -254,9 +254,9 @@
                                             <div class="success-message w-form-done">
                                                 <div>Our AI agent will be contacting you shortly...</div>
                                             </div>
-                                            <div class="error-message w-form-fail">
-                                                <div>Oops! Something went wrong</div>
-                                            </div>
+                                            <!-- <div class="error-message w-form-fail">
+                                                <div>Our AI agent will be contacting you shortly...</div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <!-- Checkbox for setting default prompt -->
@@ -749,7 +749,12 @@
             console.log(promptData)
 
             const postData = await axios
-            .post("/set_prompt", promptData)
+            .post("/set_prompt", promptData).then(() => {
+               setTimeout(() => {
+                  document.querySelector("#prompt-form").style.display = "none";
+                  document.querySelector(".success-message").style.display = "block";
+               }, 1000)
+            })
          })
 
          document.querySelector("#set-default-prompt").onclick = function() {
