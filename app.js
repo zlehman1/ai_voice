@@ -1,30 +1,68 @@
 require('dotenv').config();
 require('colors');
 const express = require('express');
+const mongoose = require("mongoose");
 const ExpressWs = require('express-ws');
 const path = require('path');
-
+const userRoutes = require('./routes/userRoutes')
+const panelRoutes = require('./routes/panelRoutes')
+var session = require('express-session')
 const { MongoClient } = require('mongodb');
-
+const bodyParser = require("body-parser");
+const passport = require('passport');
 const { GptService } = require('./services/gpt-service');
 const { StreamService } = require('./services/stream-service');
 const { TranscriptionService } = require('./services/transcription-service');
 const { TextToSpeechService } = require('./services/tts-service');
+const {TextToSpeechWebSocket} = require("./services/tts-socket")
 
+const MongoDBSessionStore = require("connect-mongodb-session");
 var mongourl = process.env.MONGODB_URL;
-const mongoclient = new MongoClient(mongourl);
+// const mongoclient = new MongoClient(mongourl);
+
+// Create a new MongoDBSessionStore
+const MongoDBStore = MongoDBSessionStore(session);
+
+// Initialize MongoDBStore with session options
+const store = new MongoDBStore({
+  uri: mongourl,
+  collection: "sessions",
+});
+
+// Catch errors in MongoDBStore
+store.on("error", function (error) {
+  console.error("MongoDBStore Error:", error);
+});
 
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const app = express();
 const expressWs = ExpressWs(app);
 
-// Set the directory for static files (like CSS, images, etc.)
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Middleware to parse application/json
+// Middleware for parsing request body
 app.use(express.json());
 
+// Set the directory for static files (like CSS, images, etc.)
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+    cookie: {
+      maxAge: 10000 * 60 * 60 * 24, // 1 day
+    },
+})
+);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+// Middleware to parse application/json
+// app.use(express.json());
+
+app.use("/accounts", userRoutes);
+app.use("/panel", panelRoutes);
 const PORT = process.env.PORT || 3000;
 
 // // Make a call
@@ -115,12 +153,14 @@ app.get('/test', (req, res) => {
 });
 
 expressWs.app.ws('/connection', (ws, req) => {
+  console.log("Connected...")
   ws.on('error', console.error);
   // Filled in from start message
   let streamSid;
   let callSid;
 
   const streamService = new StreamService(ws);
+  const socketService = new TextToSpeechWebSocket(ws);
   const transcriptionService = new TranscriptionService();
   const ttsService = new TextToSpeechService({});
   
@@ -135,8 +175,14 @@ expressWs.app.ws('/connection', (ws, req) => {
       callSid = msg.start.callSid;
       streamService.setStreamSid(streamSid);
       gptService.setCallSid(callSid);
+      socketService.setStreamSid(streamSid);
       console.log(`Twilio -> Starting Media Stream for ${streamSid}`.underline.red);
-      ttsService.generate({partialResponseIndex: null, partialResponse: "Hello! how can I assist you today?"}, 1);
+
+      // setTimeout(() => {
+      //   socketService.sendData("This is a test")
+      //   socketService.sendEosData()
+      // }, 5000)
+      ttsService.generate({partialResponseIndex: null, partialResponse: "Hello! how can I assist you?"}, 1);
     } else if (msg.event === 'media') {
       transcriptionService.send(msg.media.payload);
     } else if (msg.event === 'mark') {
@@ -145,6 +191,9 @@ expressWs.app.ws('/connection', (ws, req) => {
       marks = marks.filter(m => m !== msg.mark.name);
     } else if (msg.event === 'stop') {
       console.log(`Twilio -> Media stream ${streamSid} ended.`.underline.red);
+    }
+    else if (msg.event === 'niggamedia') {
+      console.log(`Twilio -> Nigga Media Received`.underline.red);
     }
   });
 
@@ -164,7 +213,7 @@ expressWs.app.ws('/connection', (ws, req) => {
   transcriptionService.on('transcription', async (text) => {
     if (!text) { return; }
     console.log(`Interaction ${interactionCount} – STT -> GPT: ${text}`.yellow);
-    gptService.completion(text, interactionCount);
+    gptService.completion(text, interactionCount, socketService);
     interactionCount += 1;
   });
   
@@ -182,22 +231,27 @@ expressWs.app.ws('/connection', (ws, req) => {
   streamService.on('audiosent', (markLabel) => {
     marks.push(markLabel);
   });
+
+  socketService.on('audiosent', (markLabel) => {
+    console.log("Socket mark pushed!")
+    marks.push(markLabel);
+  });
 });
 
-mongoclient.connect(mongourl)
+mongoose.connect(mongourl)
 .then(async () => {
-  console.log("Connected to MongoDB");
-  const database = mongoclient.db(); // This will use the default database specified in the connection string
+  // console.log("Connected to MongoDB");
+  // const database = mongoclient.db(); // This will use the default database specified in the connection string
 
-  // Check if the "CallTrials" collection exists
-  const collections = await database.listCollections({ name: 'CallTrials' }).toArray();
-  if (collections.length === 0) {
-    // If the collection doesn't exist, create it
-    await database.createCollection('CallTrials');
-    console.log("Created collection 'CallTrials'");
-  } else {
-    console.log("Collection 'CallTrials' already exists");
-  }
+  // // Check if the "CallTrials" collection exists
+  // const collections = await database.listCollections({ name: 'CallTrials' }).toArray();
+  // if (collections.length === 0) {
+  //   // If the collection doesn't exist, create it
+  //   await database.createCollection('CallTrials');
+  //   console.log("Created collection 'CallTrials'");
+  // } else {
+  //   console.log("Collection 'CallTrials' already exists");
+  // }
 
   // Start your Express app after ensuring the collection is created
   const server = app.listen(PORT, () => {

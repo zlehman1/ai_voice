@@ -53,6 +53,7 @@ class StreamService extends EventEmitter {
         }
       })
     );
+    console.log("Stream Service -> Mark Sent")
     this.emit('audiosent', markLabel);
   }
 }
