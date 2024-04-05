@@ -12,9 +12,8 @@ const { MongoClient } = require('mongodb');
 var mongourl = process.env.MONGODB_URL;
 const mongoclient = new MongoClient(mongourl);
 
-const GOOGLE_CLIENT_ID =
-  "176560673380-ofn0158e60l1kjoskprrtks3aprcuqol.apps.googleusercontent.com";
-const GOOGLE_CLIENT_SECRET = "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";
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 passport.use(
   new GoogleStrategy(
