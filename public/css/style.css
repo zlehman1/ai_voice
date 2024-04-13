@@ -5640,7 +5640,7 @@ body.top-menu .navbar-left .customizer-trigger + .top-menu {
   background-color: transparent;
 }
 .sidebar-toggle:hover {
-  background-color: rgba(var(--color-primary-rgba), 0.1);
+  /* background-color: rgba(var(--color-primary-rgba), 0.1); */
 }
 .sidebar-toggle:hover svg,
 .sidebar-toggle:hover i {
@@ -11993,6 +11993,11 @@ body.top-menu .navbar-left .customizer-trigger + .top-menu {
 .select2-dropdown.category-member {
   z-index: 9999;
 }
+
+.select2-search__field {
+  display: none;
+}
+
 .select2-dropdown.category-member .select2-search--dropdown .select2-search__field {
   border-radius: 3px;
   border: 1px solid var(--border-color);
@@ -23782,7 +23787,7 @@ table.table-rounded tbody tr td:last-child {
 }
 .alert2 .select2-results > .select2-results__options,
 .option2 .select2-results > .select2-results__options {
-  padding: 13px 0;
+  /* padding: 13px 0; */
 }
 
 .ui-datepicker-multi {
@@ -30981,3 +30986,8 @@ body:after {
   }
 }
 /*# sourceMappingURL=maps/style.css.map */
+
+/* custom css */
+#campaignsdropdown {
+  font-weight: 600;
+}

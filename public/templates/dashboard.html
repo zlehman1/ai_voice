@@ -65,13 +65,22 @@
       <nav class="navbar navbar-light">
          <div class="navbar-left">
             <div class="logo-area">
+               <a href="#" class="sidebar-toggle">
+                  <img class="svg" src="/img/svg/align-center-alt.svg" alt="/img"></a>
                <a class="navbar-brand" href="index.html">
                   <!-- <img class="dark" src="/img/logo-dark.png" alt="logo">
                   <img class="light" src="/img/logo-white.png" alt="logo"> -->
                </a>
-               <a href="#" class="sidebar-toggle">
-                  <img class="svg" src="/img/svg/align-center-alt.svg" alt="/img"></a>
-            </div>
+               <select name="select-alerts2" id="campaignsdropdown" class="form-control">
+                  <option value="01">Option 1</option>
+                  <option value="02">Option 2</option>
+                  <option value="03">Option 3</option>
+                  <option value="04">Option 4</option>
+                  <option value="05">Option 5</option>
+                  </select>
+               </div>
+               <button class="btn btn-xs btn-dark" style="margin-left: 10px;">New</button>
+               <!-- <span class="" style="margin-left: 10px;"><i class="uil uil-plus btn btn-sm btn-dark"></i></span> -->
             <div class="top-menu">
 
                <div class="hexadash-top-menu position-relative">
@@ -1226,6 +1235,13 @@
          <div class="sidebar sidebar-collapse" id="sidebar">
             <div class="sidebar__menu-group">
                <ul class="sidebar_nav">
+                  <li class="open">
+                     <a href="/panel/campaigns" class="">
+                        <span class="nav-icon uil uil-globe"></span>
+                        <span class="menu-text active">Campaigns</span>
+                        <!-- <span class="toggle-icon"></span> -->
+                     </a>
+                  </li>
                   <li class="open">
                      <a href="/panel/dashboard" class="active">
                         <span class="nav-icon uil uil-create-dashboard"></span>

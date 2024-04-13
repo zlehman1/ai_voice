@@ -21,12 +21,16 @@ router.get('/dashboard', connectEnsureLogin.ensureLoggedIn("/accounts/sign-in"),
     res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'dashboard.html'));
   });
 
-  router.get('/interactions', (req, res) => {
-    res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'interactions.html'));
-  });
+router.get('/interactions', (req, res) => {
+  res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'interactions.html'));
+});
 
-  router.get('/leads', (req, res) => {
-    res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'leads.html'));
-  });
+router.get('/leads', (req, res) => {
+  res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'leads.html'));
+});
 
-  module.exports = router;
+router.get('/createcampaign', (req, res) => {
+  res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'createcampaign.html'));
+});
+
+module.exports = router;
