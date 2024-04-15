@@ -51,6 +51,8 @@
    <!-- Fonts -->
    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
+   <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+
 </head>
 
 <body class="layout-light side-menu">
@@ -1346,15 +1348,15 @@
                   </div>
                   <div class="col-lg-6">
                      <div class="card card-default card-md mb-4">
-                        <div class="card-header">
-                           <h6>Campaign Details</h6>
+                        <div class="" style="">
                         </div>
                         <div class="card-body">
                            <div class="edit-profile__body">
-                              <form class="signinform">
+                              <form class="createcampaignform">
+                              <p style="font-size: 13px;" class="mt-1 mb-4">1. Campaign Details</p>
                               <div class="form-group mb-25">
-                                 <label for="campaign_name">Name</label>
-                                 <input type="campaign_name" name="campaign_name" class="form-control" id="campaign_name" placeholder="Feedback Campaign" required>
+                                 <label for="campaign_name">Name *</label>
+                                 <input type="text" name="campaign_name" class="form-control" id="campaign_name" placeholder="Feedback Campaign" required>
                               </div>
                               <div class="form-group mb-25">
                                  <label for="campaign_name">Leads</label>
@@ -1368,12 +1370,22 @@
                                        </div>
                                        <a href="" style="font-size: 14px;"><i class="la la-download"></i>&nbsp;Download sample CSV file</a>
                                        <div class="avatar-up">
-                                          <input type="file" name="upload-avatar-input" class="upload-avatar-input leadImportFile" onchange="updateFileName()" accept=".csv">
+                                          <input type="file" class="upload-avatar-input leadImportFile" onchange="updateFileName()" accept=".csv">
                                        </div>
                                     </div>
                                  </div>
                               </div>
                               
+                              <p style="font-size: 13px;" class="mt-1 mb-4">2. AI Settings</p>
+                              <div class="form-group mb-25">
+                                 <label for="ai_name">Agent Name *</label>
+                                 <input type="text" name="ai_name" class="form-control" id="ai_name" placeholder="John Doe" required>
+                              </div>
+                              <div class="form-group mb-25">
+                                 <label for="ai_prompt">Prompt</label>
+                                 <textarea name="ai_prompt" id="ai_prompt" class="form-control" cols="30" rows="5" placeholder="Prompt goes here..."></textarea>
+                              </div>
+
                               <div class="admin__button-group button-group d-flex pt-1 justify-content-md-start justify-content-center">
                                  <button type="submit" class="btn btn-primary btn-default w-100 btn-squared text-capitalize lh-normal px-50 signIn-createBtn createCampaignBtn">
                                     Create
@@ -1389,6 +1401,8 @@
                   <!-- ends: .col-lg-6 -->
                </div>
             </div>
+
+            <!--  -->
          </div>
          <!-- ends: .dm-page-content -->
 
@@ -1457,7 +1471,7 @@
    <script src="../assets/theme_assets/js/jvectormap-init.js"></script>
    <script src="../assets/theme_assets/js/leaflet-init.js"></script>
    <script src="../assets/theme_assets/js/main.js"></script>
-   <script src="../js/leads.js"></script>
+   <script src="../js/createcampaign.js"></script>
    <!-- endinject-->
 </body>
 

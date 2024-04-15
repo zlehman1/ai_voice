@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 
-const campaignsSchema = mongoose.Schema(
+const leadsSchema = mongoose.Schema(
     {
         user_id: {
             type: String,
@@ -11,24 +11,21 @@ const campaignsSchema = mongoose.Schema(
             type: String,
             required: true,
         },
-        campaign_name: {
+        lead_id: {
             type: String,
-            required: true,
+            required: true,    
         },
-        ai_name: {
+        name: {
             type: String,
-            required: true,
+            required: true,    
         },
-        ai_prompt: {
-            type: String,
-        },
-        total_leads: {
+        country_code: {
             type: Number,
-            default: 0,
+            required: true,    
         },
-        total_calls: {
+        phone_number: {
             type: Number,
-            default: 0,
+            required: true,    
         },
         createdAt: {
             type: Number, default: Date.now(),
@@ -36,4 +33,4 @@ const campaignsSchema = mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('CampaignsDB', campaignsSchema);
+module.exports = mongoose.model('LeadsDB', leadsSchema);
