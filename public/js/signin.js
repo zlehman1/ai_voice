@@ -20,7 +20,7 @@ document
         // console.log(response.data);
         if (response.data === true) {
           console.log("True")
-          window.location.href = "/panel/dashboard"
+          window.location.href = "/panel/campaigns"
         } else {
             console.log("Invalid Email or Password")
         }

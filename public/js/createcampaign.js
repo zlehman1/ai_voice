@@ -219,19 +219,15 @@ function updateFileName() {
     if(isLeadUploaded == true) {
         campaignData["leads_data"] = formattedLeadsObject
     }
+    showNotificationFunction("success","check-circle","true","Success","Campaign successfully created! 🎉")
+    setTimeout(() => {
+        window.location.href = "/panel/campaigns"
+    }, 1000)
 
     axios
       .post("/panel/createcampaign", campaignData)
       .then((response) => {
         console.log(response)
-        if(response.data == false) {
-            showNotificationFunction("danger","times-circle","true","Error","An error has occurred. Please try again.")
-        } else {
-            showNotificationFunction("success","check-circle","true","Success","Campaign successfully created! 🎉")
-            setTimeout(() => {
-                window.location.href = "/panel/campaigns"
-            }, 3000)
-        }
       })
 
     console.log(campaignData)

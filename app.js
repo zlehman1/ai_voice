@@ -152,6 +152,8 @@ app.get('/test', (req, res) => {
   res.send("Hello!");
 });
 
+app.engine('html', require('ejs').renderFile);
+
 expressWs.app.ws('/connection', (ws, req) => {
   console.log("Connected...")
   ws.on('error', console.error);

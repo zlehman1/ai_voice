@@ -37,15 +37,15 @@ FooTable.MyFiltering = FooTable.Filtering.extend({
 		// create the status form group and dropdown
 		var $status_form_grp = $('<div/>', {'class': 'form-group dm-select d-flex align-items-center adv-table-searchs__position my-xl-25 my-15 me-sm-20 me-0 '})
 			.append($('<label/>', {'class': 'd-flex align-items-center mb-sm-0 mb-2', text: 'position'}))
-			.prependTo(self.$form);
+			// .prependTo(self.$form);
 
 		self.$status = $('<select/>', { 'class': 'form-control ms-sm-10 ms-0' })
 			.on('change', {self: self}, self._onStatusDropdownChanged)
 			.append($('<option/>', {text: self.statusDefault}))
-			.appendTo($status_form_grp);
+			// .appendTo($status_form_grp);
 
 		$.each(self.statuses, function(i, status){
-			self.$status.append($('<option/>').text(status));
+			// self.$status.append($('<option/>').text(status));
 		});
 
 

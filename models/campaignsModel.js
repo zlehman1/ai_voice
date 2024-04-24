@@ -22,6 +22,12 @@ const campaignsSchema = mongoose.Schema(
         ai_prompt: {
             type: String,
         },
+        ai_voice: {
+            type: String,
+        },
+        ai_initial_message: {
+            type: String,
+        },
         total_leads: {
             type: Number,
             default: 0,

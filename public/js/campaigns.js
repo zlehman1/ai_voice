@@ -2,12 +2,17 @@ fetch("/panel/getcampaigns")
 .then(res => res.json())
 .then(data => {
     console.log(data)
+    // Reverse the data array
+    data.reverse();
     var campaignsCards = ''
     for(let y = 0; y < data.length; y++) {
         campaignsCards += `
         <div class="col-xxl-3 col-lg-4 col-md-6 mb-25">
         <!-- Profile Acoount -->
         <div class="card">
+        <div style="width:20%;">
+        <span class="dm-tag tag-success tag-transparented">Active</span>
+        </div>
             <div class="card-body text-center pt-30 px-25 pb-0">
 
                 <div class="account-profile-cards ">
@@ -16,10 +21,10 @@ fetch("/panel/getcampaigns")
                     <p class="ap-nameAddress__subTitle  fs-14 pt-1 m-0 ">${new Date(data[y]["createdAt"]).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</p>
                     </div>
                     <div class="ap-button account-profile-cards__button button-group d-flex justify-content-center flex-wrap pt-20">
-                    <button type="button" class="border text-capitalize px-25 color-gray transparent radius-md">
-                        <img class="svg" src="/img/svg/mail.svg" alt="mail">View</button>
-                    <button type="button" class="border text-capitalize px-25 color-gray transparent follow radius-md">
-                        <span class="las la-user-plus follow-icon"></span>Edit</button>
+                    <button type="button" class="btn btn-default btn-squared color-success btn-outline-success" onclick="window.location.href = '/panel/${data[y]["campaign_id"]}/dashboard'">
+                    <i class="uil uil-create-dashboard"></i>Manage</button>
+                    <button type="button" class="btn btn-default btn-squared color-primary btn-outline-primary">
+                    <i class="uil uil-edit"></i>Edit</button>
                     </div>
                 </div>
 

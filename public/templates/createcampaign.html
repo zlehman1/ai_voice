@@ -1348,7 +1348,7 @@
                   </div>
                   <div class="col-lg-6">
                      <div class="card card-default card-md mb-4">
-                        <div class="" style="">
+                        <div class="">
                         </div>
                         <div class="card-body">
                            <div class="edit-profile__body">
@@ -1382,8 +1382,19 @@
                                  <input type="text" name="ai_name" class="form-control" id="ai_name" placeholder="John Doe" required>
                               </div>
                               <div class="form-group mb-25">
+                                 <label for="ai_voice">AI Voice *</label>
+                                 <select name="ai_voice" id="ai_voice" class="form-control">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    </select>
+                              </div>
+                              <div class="form-group mb-25">
                                  <label for="ai_prompt">Prompt</label>
                                  <textarea name="ai_prompt" id="ai_prompt" class="form-control" cols="30" rows="5" placeholder="Prompt goes here..."></textarea>
+                              </div>
+                              <div class="form-group mb-25">
+                                 <label for="ai_initial_message">Initial Message *</label>
+                                 <input type="text" name="ai_initial_message" class="form-control" id="ai_initial_message" value="Hello there! How are you doing today?" required>
                               </div>
 
                               <div class="admin__button-group button-group d-flex pt-1 justify-content-md-start justify-content-center">

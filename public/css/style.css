@@ -18794,7 +18794,7 @@ td.order-summery .total > div {
 .orderDatatable_actions {
   min-width: 130px;
   max-width: 100%;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
 }
 .orderDatatable_actions li a {
   width: 35px;

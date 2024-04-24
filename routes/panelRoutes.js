@@ -24,20 +24,55 @@ const router = express.Router();
 
 router.use(express.static(path.join(__dirname, "public")));
 
-router.get('/dashboard', connectEnsureLogin.ensureLoggedIn("/accounts/sign-in"), (req, res) => {
-    res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'dashboard.html'));
+router.get('/:campaignId/dashboard', connectEnsureLogin.ensureLoggedIn("/accounts/sign-in"), async (req, res) => {
+    const {campaignId} = req.params
+    if(campaignId) {
+      const validateCampaignId = await CampaignsDB.findOne({user_id: req.user._id, campaign_id: campaignId})
+      if(validateCampaignId) {
+        res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'dashboard.html'));
+      } else {
+        res.redirect("/panel/campaigns")
+      }
+    } else {
+      res.redirect("/panel/campaigns")
+    }
   });
 
   router.get('/campaigns', connectEnsureLogin.ensureLoggedIn("/accounts/sign-in"), (req, res) => {
     res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'campaigns.html'));
   });
 
-router.get('/interactions', connectEnsureLogin.ensureLoggedIn("/accounts/sign-in"), (req, res) => {
-  res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'interactions.html'));
+router.get('/:campaignId/interactions', connectEnsureLogin.ensureLoggedIn("/accounts/sign-in"), async (req, res) => {
+  const {campaignId} = req.params
+  if(campaignId) {
+    const validateCampaignId = await CampaignsDB.findOne({user_id: req.user._id, campaign_id: campaignId})
+    if(validateCampaignId) {
+      res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'interactions.html'));
+    } else {
+      res.redirect("/panel/campaigns")
+    }
+  } else {
+    res.redirect("/panel/campaigns")
+  }
 });
 
-router.get('/leads', connectEnsureLogin.ensureLoggedIn("/accounts/sign-in"), (req, res) => {
-  res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'leads.html'));
+// router.get('/leads', connectEnsureLogin.ensureLoggedIn("/accounts/sign-in"), (req, res) => {
+//   res.sendFile(path.join(__dirname, "../", 'public', 'templates', 'leads.html'));
+// });
+
+router.get('/:campaignId/leads', connectEnsureLogin.ensureLoggedIn("/accounts/sign-in"), async (req, res) => {
+  const {campaignId} = req.params
+  if(campaignId) {
+    const validateCampaignId = await CampaignsDB.findOne({user_id: req.user._id, campaign_id: campaignId})
+    if(validateCampaignId) {
+      const leadsData = await LeadsDB.find({user_id: req.user._id, campaign_id: campaignId})
+      res.render(path.join(__dirname, "../", 'public', 'templates', 'leads.html'), {leadsData: leadsData});
+    } else {
+      res.redirect("/panel/campaigns")
+    }
+  } else {
+    res.redirect("/panel/campaigns")
+  }
 });
 
 router.get('/createcampaign', connectEnsureLogin.ensureLoggedIn("/accounts/sign-in"), (req, res) => {
@@ -54,7 +89,7 @@ router.post("/createcampaign", connectEnsureLogin.ensureLoggedIn("/accounts/sign
       console.log(campaignId)
 
       if(!await CampaignsDB.findOne({campaign_id: campaignId})) {
-        var campaignData = {"user_id": req.user._id, "campaign_id": campaignId, "campaign_name": req.body.campaign_name, "ai_name": req.body.ai_name, "ai_prompt": req.body.ai_prompt}
+        var campaignData = {"user_id": req.user._id, "campaign_id": campaignId, "campaign_name": req.body.campaign_name, "ai_name": req.body.ai_name, "ai_voice": req.body.ai_voice, "ai_prompt": req.body.ai_prompt, "ai_initial_message": req.body.ai_initial_message}
         await CampaignsDB.create(campaignData)
 
         if(req.body.leads_data) {
