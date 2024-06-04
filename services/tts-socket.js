@@ -8,7 +8,7 @@ class TextToSpeechWebSocket extends EventEmitter {
   constructor(websocket) {
     super();
     this.myws = websocket;
-    console.log(this.myws.url)
+    console.log("This: ", this.myws.url)
     this.expectedAudioIndex = 0;
     this.audioBuffer = {};
     this.streamSid = "";
@@ -17,6 +17,7 @@ class TextToSpeechWebSocket extends EventEmitter {
 
   setStreamSid(streamSid) {
     this.streamSid = streamSid;
+    console.log("Socket service stream SID: ", this.streamSid)
   }
 
   connect() {

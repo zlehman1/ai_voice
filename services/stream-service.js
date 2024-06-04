@@ -12,6 +12,7 @@ class StreamService extends EventEmitter {
 
   setStreamSid (streamSid) {
     this.streamSid = streamSid;
+    console.log("Stream service: ", this.streamSid)
   }
 
   buffer (index, audio) {

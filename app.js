@@ -18,7 +18,7 @@ const {TextToSpeechWebSocket} = require("./services/tts-socket")
 
 const MongoDBSessionStore = require("connect-mongodb-session");
 var mongourl = process.env.MONGODB_URL;
-// const mongoclient = new MongoClient(mongourl);
+const mongoclient = new MongoClient(mongourl);
 
 // Create a new MongoDBSessionStore
 const MongoDBStore = MongoDBSessionStore(session);
@@ -80,6 +80,8 @@ function makeACall(toNumber) {
 });
 console.log("Call successfully made: ", calls)
 }
+
+// makeACall(process.env.YOUR_NUMBER)
 
 app.post('/incoming', (req, res) => {
   res.status(200);

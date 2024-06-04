@@ -27,6 +27,7 @@ class GptService extends EventEmitter {
   // ChatGPT decides to transfer the call.
   setCallSid (callSid) {
     this.userContext.push({ 'role': 'system', 'content': `callSid: ${callSid}` });
+    console.log("GPT Service call SID: ", callSid)
   }
 
   setPrompt(prompt) {
