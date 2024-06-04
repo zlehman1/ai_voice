@@ -18,7 +18,7 @@ const {TextToSpeechWebSocket} = require("./services/tts-socket")
 
 const MongoDBSessionStore = require("connect-mongodb-session");
 var mongourl = process.env.MONGODB_URL;
-const mongoclient = new MongoClient(mongourl);
+const mongoclient = new MongoClient(mongourl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Create a new MongoDBSessionStore
 const MongoDBStore = MongoDBSessionStore(session);
