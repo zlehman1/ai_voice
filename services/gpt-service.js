@@ -112,7 +112,7 @@ class GptService extends EventEmitter {
     socketService.sendEosData()
     this.userContext.push({'role': 'assistant', 'content': completeResponse});
     console.log(`GPT -> user context length: ${this.userContext.length}`.green);
-    console.log(`GPT -> response: ${completeResponse}`.red);
+    console.log(`GPT -> response: ${completeResponse} | ${new Date().toLocaleString()}`.red);
   }
 }
 

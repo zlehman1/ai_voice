@@ -216,18 +216,18 @@ expressWs.app.ws('/connection', (ws, req) => {
 
   transcriptionService.on('transcription', async (text) => {
     if (!text) { return; }
-    console.log(`Interaction ${interactionCount} – STT -> GPT: ${text}`.yellow);
+    console.log(`Interaction ${interactionCount} – STT -> GPT: ${text} | ${new Date().toLocaleString()}`.yellow);
     gptService.completion(text, interactionCount, socketService);
     interactionCount += 1;
   });
   
   gptService.on('gptreply', async (gptReply, icount) => {
-    console.log(`Interaction ${icount}: GPT -> TTS: ${gptReply.partialResponse}`.green );
+    console.log(`Interaction ${icount}: GPT -> TTS: ${gptReply.partialResponse} | ${new Date().toLocaleString()}`.green );
     ttsService.generate(gptReply, icount);
   });
 
   ttsService.on('speech', (responseIndex, audio, label, icount) => {
-    console.log(`Interaction ${icount}: TTS -> TWILIO: ${label}`.blue);
+    console.log(`Interaction ${icount}: TTS -> TWILIO: ${label} | ${new Date().toLocaleString()}`.blue);
 
     streamService.buffer(responseIndex, audio);
   });
