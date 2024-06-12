@@ -37,7 +37,6 @@ store.on("error", function (error) {
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const app = express();
-const expressWs = ExpressWs(app);
 
 // Middleware for parsing request body
 app.use(express.json());
@@ -52,14 +51,13 @@ app.use(
     store: store,
     cookie: {
       maxAge: 10000 * 60 * 60 * 24, // 1 day
+      httpOnly: true, // Add httpOnly flag for better security
     },
 })
 );
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
-// Middleware to parse application/json
-// app.use(express.json());
 
 app.use("/accounts", userRoutes);
 app.use("/panel", panelRoutes);
@@ -167,7 +165,7 @@ expressWs.app.ws('/connection', (ws, req) => {
   const socketService = new TextToSpeechWebSocket(ws);
   const transcriptionService = new TranscriptionService();
   const ttsService = new TextToSpeechService({});
-  
+
   let marks = [];
   let interactionCount = 0;
 
@@ -196,9 +194,6 @@ expressWs.app.ws('/connection', (ws, req) => {
     } else if (msg.event === 'stop') {
       console.log(`Twilio -> Media stream ${streamSid} ended.`.underline.red);
     }
-    else if (msg.event === 'niggamedia') {
-      console.log(`Twilio -> Nigga Media Received`.underline.red);
-    }
   });
 
   transcriptionService.on('utterance', async (text) => {
@@ -220,7 +215,7 @@ expressWs.app.ws('/connection', (ws, req) => {
     gptService.completion(text, interactionCount, socketService);
     interactionCount += 1;
   });
-  
+
   gptService.on('gptreply', async (gptReply, icount) => {
     console.log(`Interaction ${icount}: GPT -> TTS: ${gptReply.partialResponse} | ${new Date().toLocaleString()}`.green );
     ttsService.generate(gptReply, icount);
