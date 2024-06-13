@@ -242,8 +242,8 @@
                                     <div class="margin-top margin-medium">
                                        <div class="button-group">
                                           <a href="#" style="border-color: #000000;" class="button is-secondary is-small w-button">Start Free Trial</a>
-                                          <a href="#" class="button is-link is-icon w-inline-block">
-                                             <div>Contact Sales</div>
+                                          <a style="cursor: pointer;" class="tryYourself button is-link is-icon w-inline-block">
+                                             <div>Try it yourself</div>
                                              <div class="icon-embed-xxsmall w-embed">
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                    <path d="M6 3L11 8L6 13" stroke="CurrentColor" stroke-width="1.5"/>
@@ -258,7 +258,7 @@
                                     <div class="">
                                         <div class="hero_form-block w-form">
                                            <form id="prompt-form" name="prompt-form" data-name="Prompt Form" method="post">
-                                               <input type="text" class="form-input is-hero w-input" maxlength="256" name="name" data-name="Name" placeholder="John Doe" id="name" required="" />
+                                               <input type="text" class="form-input is-hero w-input nameInput" maxlength="256" name="name" data-name="Name" placeholder="John Doe" id="name" required="" />
                                                <input type="email" class="form-input is-hero w-input" maxlength="256" name="email" data-name="Email" placeholder="john@mail.com" id="email-2" required="" style="margin-top: 10px;" />
                                                <input type="tel" class="form-input is-hero w-input" maxlength="256" name="phone" data-name="Phone Number" placeholder="+919876543210" id="email-2" required="" style="margin-top: 10px;" />
                                                 <textarea required class="form-input is-hero w-input promptText" placeholder="Enter your prompt here" name="prompt" id="prompt" cols="30" rows="5" style="margin-top: 10px;"></textarea>
@@ -857,6 +857,10 @@
             } else {
                document.querySelector(".promptText").value = ``
             }
+         }
+
+         document.querySelector(".tryYourself").onclick = function() {
+            document.querySelector(".nameInput").focus()
          }
       </script>
    </body>

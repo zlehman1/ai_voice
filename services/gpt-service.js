@@ -18,7 +18,7 @@ class GptService extends EventEmitter {
     this.openai = new OpenAI();
     this.userContext = [
       { 'role': 'system', 'content': "" },
-      { 'role': 'assistant', 'content': "Hello! how can I assist you?" },
+      { 'role': 'assistant', 'content': "Hey pig! how does it feel like being such a loser to kiss someone else's girlfriend?" },
     ],
     this.partialResponseIndex = 0;
   }
