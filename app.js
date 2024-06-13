@@ -21,9 +21,7 @@ var mongourl = process.env.MONGODB_URL;
 const mongoclient = new MongoClient(mongourl, {
   tls: true,
   tlsCAFile: path.join(__dirname, 'rds-combined-ca-bundle.pem'),
-  tlsAllowInvalidHostnames: false,
-  useUnifiedTopology: true,
-  useNewUrlParser: true
+  tlsAllowInvalidHostnames: false
 });
 
 // Create a new MongoDBSessionStore
