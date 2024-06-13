@@ -1,12 +1,772 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Voice Application</title>
-</head>
-<body>
-    <h1>Welcome to the AI Voice Application</h1>
-    <p>This is a placeholder index.html file for the AI Voice application.</p>
-</body>
+<!DOCTYPE html><!-- This site was created in Webflow. https://www.webflow.com --><!-- Last Published: Sun Feb 12 2023 17:36:14 GMT+0000 (Coordinated Universal Time) -->
+<html data-wf-page="63b7f5978640f856f0970e06" data-wf-site="63b7f5978640f802b3970e23">
+   <head>
+      <meta charset="utf-8"/>
+      <title>Counter — Free Webflow Landing by Kickstart Studio</title>
+      <meta content="Counter is a sleek and modern webflow template designed specifically for SaaS companies. It&#x27;s free to use &amp; fully customizable." name="description"/>
+      <meta content="Counter — Free Webflow Landing by Kickstart Studio" property="og:title"/>
+      <meta content="Counter is a sleek and modern webflow template designed specifically for SaaS companies. It&#x27;s free to use &amp; fully customizable." property="og:description"/>
+      <meta content="Counter — Free Webflow Landing by Kickstart Studio" property="twitter:title"/>
+      <meta content="Counter is a sleek and modern webflow template designed specifically for SaaS companies. It&#x27;s free to use &amp; fully customizable." property="twitter:description"/>
+      <meta property="og:type" content="website"/>
+      <meta content="summary_large_image" name="twitter:card"/>
+      <meta content="width=device-width, initial-scale=1" name="viewport"/>
+      <meta content="Webflow" name="generator"/>
+      <link href="../css/index.css" rel="stylesheet" type="text/css"/>
+      <style>@media (min-width:992px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="9803b09d-9ccd-fb64-569b-b34901eb1e11"] {opacity:0;}}</style>
+      <link href="https://fonts.googleapis.com" rel="preconnect"/>
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/>
+      <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script><script type="text/javascript">WebFont.load({  google: {    families: ["Outfit:100,200,300,regular,500,600,700,800"]  }});</script><!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]--><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+      <link href="https://assets.website-files.com/63b7f5978640f802b3970e23/63b97a50d45a7a3d3c9be197_kickstart-favicon.png" rel="shortcut icon" type="image/x-icon"/>
+      <link href="https://assets.website-files.com/63b7f5978640f802b3970e23/63b97a554084181170032048_kickstart-webclip.png" rel="apple-touch-icon"/>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <!-- Please keep this css code to improve the font quality-->
+      <style>
+         * {
+         -webkit-font-smoothing: antialiased;
+         -moz-osx-font-smoothing: grayscale;
+         }
+      </style>
+      <!-- You can remove this -->
+      <meta name="facebook-domain-verification" content="mlk59ybu44651lzcbhhxjfl8vfae8q" />
+   </head>
+   <body>
+      <div class="page-wrapper">
+         <div class="global-styles w-embed">
+            <style>
+               /* Get rid of top margin on first element in any rich text element */
+               .w-richtext > :not(div):first-child, .w-richtext > div:first-child > :first-child {
+               margin-top: 0 !important;
+               }
+               /* Get rid of bottom margin on last element in any rich text element */
+               .w-richtext>:last-child, .w-richtext ol li:last-child, .w-richtext ul li:last-child {
+               margin-bottom: 0 !important;
+               }
+               /* 
+               Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+               Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+               Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+               */
+               /*
+               a,
+               .w-input,
+               .w-select,
+               .w-tab-link,
+               .w-nav-link,
+               .w-dropdown-btn,
+               .w-dropdown-toggle,
+               .w-dropdown-link {
+               color: inherit;
+               text-decoration: inherit;
+               font-size: inherit;
+               }
+               */
+               /* Prevent all click and hover interaction with an element */
+               .pointer-events-off {
+               pointer-events: none;
+               }
+               /* Enables all click and hover interaction with an element */
+               .pointer-events-on {
+               pointer-events: auto;
+               }
+               /* Snippet enables you to add class of div-square which creates and maintains a 1:1 dimension of a div.*/
+               .div-square::after {
+               content: "";
+               display: block;
+               padding-bottom: 100%;
+               }
+               /*Hide focus outline for main content element*/
+               main:focus-visible {
+               outline: -webkit-focus-ring-color auto 0px;
+               }
+               /* Make sure containers never lose their center alignment*/
+               .container-medium, .container-small, .container-large {
+               margin-right: auto !important;
+               margin-left: auto !important;
+               }
+               /*Reset selects, buttons, and links styles*/
+               .w-input, .w-select, a {
+               color: inherit;
+               text-decoration: inherit;
+               font-size: inherit;
+               }
+               /*Apply "..." after 3 lines of text */
+               .text-style-3lines {
+               display: -webkit-box;
+               overflow: hidden;
+               -webkit-line-clamp: 3;
+               -webkit-box-orient: vertical;
+               }
+               /* Apply "..." after 2 lines of text */
+               .text-style-2lines {
+               display: -webkit-box;
+               overflow: hidden;
+               -webkit-line-clamp: 2;
+               -webkit-box-orient: vertical;
+               }
+               /* Apply "..." at 100% width */
+               .truncate-width { 
+               width: 100%; 
+               white-space: nowrap; 
+               overflow: hidden; 
+               text-overflow: ellipsis; 
+               }
+               /* Removes native scrollbar */
+               .no-scrollbar {
+               -ms-overflow-style: none;  // IE 10+
+               overflow: -moz-scrollbars-none;  // Firefox
+               }
+               .no-scrollbar::-webkit-scrollbar {
+               display: none; // Safari and Chrome
+               }
+               /* Adds inline flex display */
+               .display-inlineflex {
+               display: inline-flex;
+               }
+               /* These classes are never overwritten */
+               .hide {
+               display: none !important;
+               }
+               @media screen and (max-width: 991px) {
+               .hide, .hide-tablet {
+               display: none !important;
+               }
+               }
+               @media screen and (max-width: 767px) {
+               .hide-mobile-landscape{
+               display: none !important;
+               }
+               }
+               @media screen and (max-width: 479px) {
+               .hide-mobile{
+               display: none !important;
+               }
+               }
+               .margin-0 {
+               margin: 0rem !important;
+               }
+               .padding-0 {
+               padding: 0rem !important;
+               }
+               .spacing-clean {
+               padding: 0rem !important;
+               margin: 0rem !important;
+               }
+               .margin-top {
+               margin-right: 0rem !important;
+               margin-bottom: 0rem !important;
+               margin-left: 0rem !important;
+               }
+               .padding-top {
+               padding-right: 0rem !important;
+               padding-bottom: 0rem !important;
+               padding-left: 0rem !important;
+               }
+               .margin-right {
+               margin-top: 0rem !important;
+               margin-bottom: 0rem !important;
+               margin-left: 0rem !important;
+               }
+               .padding-right {
+               padding-top: 0rem !important;
+               padding-bottom: 0rem !important;
+               padding-left: 0rem !important;
+               }
+               .margin-bottom {
+               margin-top: 0rem !important;
+               margin-right: 0rem !important;
+               margin-left: 0rem !important;
+               }
+               .padding-bottom {
+               padding-top: 0rem !important;
+               padding-right: 0rem !important;
+               padding-left: 0rem !important;
+               }
+               .margin-left {
+               margin-top: 0rem !important;
+               margin-right: 0rem !important;
+               margin-bottom: 0rem !important;
+               }
+               .padding-left {
+               padding-top: 0rem !important;
+               padding-right: 0rem !important;
+               padding-bottom: 0rem !important;
+               }
+               .margin-horizontal {
+               margin-top: 0rem !important;
+               margin-bottom: 0rem !important;
+               }
+               .padding-horizontal {
+               padding-top: 0rem !important;
+               padding-bottom: 0rem !important;
+               }
+               .margin-vertical {
+               margin-right: 0rem !important;
+               margin-left: 0rem !important;
+               }
+               .padding-vertical {
+               padding-right: 0rem !important;
+               padding-left: 0rem !important;
+               }
+            </style>
+         </div>
+         <main class="main-wrapper">
+            <div data-animation="default" class="navigation_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="f396fa0b-4cc2-3482-4d55-2e0958a462ec" role="banner" data-duration="400">
+               <div class="navigation_container">
+                  <a href="/" class="navigation_logo-link w-nav-brand" style="font-size: 1.7rem;font-weight: 600;color: #2b59ff;">swif<span style="color: #5CE1E6;">t</span>ech</a>
+                  <nav role="navigation" id="w-node-f396fa0b-4cc2-3482-4d55-2e0958a462f0-f0970e06" class="navigation_menu w-nav-menu"><a href="#" class="navigation_link w-nav-link">About</a><a href="#" class="navigation_link w-nav-link">Blog</a><a href="#" class="navigation_link w-nav-link">Metrics</a><a href="#" class="navigation_link w-nav-link">Charts</a></nav>
+                  <div id="w-node-f396fa0b-4cc2-3482-4d55-2e0958a46303-f0970e06" class="navigation_button-wrapper">
+                     <a href="#" class="button is-navigation-button w-button">Contact Sales</a>
+                     <div class="navigation_menu-button w-nav-button">
+                        <div class="menu-icon2">
+                           <div class="menu-icon_line-top"></div>
+                           <div class="menu-icon_line-middle">
+                              <div class="menu-icon_line-middle-inner"></div>
+                           </div>
+                           <div class="menu-icon_line-bottom"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <header class="section_hero">
+               <div class="padding-global">
+                  <div class="container-large">
+                     <div class="padding-top padding-huge">
+                        <div class="hero_component">
+                           <div class="margin-bottom margin-xxlarge">
+                              <div class="w-layout-grid hero_content-wrapper">
+                                 <div class="hero_content-left">
+                                    <h2 data-w-id="e062f3ce-a49a-626a-d00d-8d5bc5ae6fd8" style="opacity:0">Automate Enterprise Sales and Support with AI Call Agents</h2><br>
+                                    <p class="text-size-small">Our AI-powered lead management solutions, designed to revolutionize the way you approach sales. Our platform offers a suite of advanced features to streamline lead management, boost productivity, and drive revenue growth for your business.</p>
+                                 </div>
+                                 <div data-w-id="e062f3ce-a49a-626a-d00d-8d5bc5ae6fda" style="opacity:0" class="hero_content-right">
+                                    <!-- <p class="text-size-medium">Get in touch with us! We're excited to offer you a demo.</p> -->
+                                    <div class="">
+                                        <div class="hero_form-block w-form">
+                                           <form id="prompt-form" name="prompt-form" data-name="Prompt Form" method="post">
+                                               <input type="text" class="form-input is-hero w-input" maxlength="256" name="name" data-name="Name" placeholder="John Doe" id="name" required="" />
+                                               <input type="email" class="form-input is-hero w-input" maxlength="256" name="email" data-name="Email" placeholder="john@mail.com" id="email-2" required="" style="margin-top: 10px;" />
+                                               <input type="tel" class="form-input is-hero w-input" maxlength="256" name="phone" data-name="Phone Number" placeholder="+919876543210" id="email-2" required="" style="margin-top: 10px;" />
+                                                <textarea required class="form-input is-hero w-input promptText" placeholder="Enter your prompt here" name="prompt" id="prompt" cols="30" rows="5" style="margin-top: 10px;"></textarea>
+                                                <input type="submit" value="Get a call from AI agent" data-wait="Please wait..." class="button background-color-primary w-button submitButton" style="margin-top: 10px;"/>
+                                            </form>
+                                            <div class="text-size-tiny text-style-muted">
+                                                <!-- By clicking Sign Up you&#x27;re confirming that you agree with our <a href="#" class="text-link">TOS.</a> -->
+                                            </div>
+                                            <div class="success-message w-form-done">
+                                                <div>Our AI agent will be contacting you shortly...</div>
+                                            </div>
+                                            <!-- <div class="error-message w-form-fail">
+                                                <div>Our AI agent will be contacting you shortly...</div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <!-- Checkbox for setting default prompt -->
+                                    <div class="checkbox-wrapper" style="display: inline-block; vertical-align: middle;margin-top: 15px;">
+                                        <input type="checkbox" id="set-default-prompt" name="set-default-prompt">
+                                        <label for="set-default-prompt" style="display: inline-block; vertical-align: middle;">Use a template</label>
+                                    </div>
+                                </div>
+                                
+                              </div>
+                           </div>
+                           <div class="hero_image-wrapper">
+                            <!-- <img src="https://assets.website-files.com/63b7f5978640f802b3970e23/63b83016ae20f79b0b99c7ec_1.svg" loading="lazy" style="opacity:0" data-w-id="e062f3ce-a49a-626a-d00d-8d5bc5ae6fee" alt=""/> -->
+                            <img src="../images/dashboard1.png" loading="lazy" style="opacity:0;border-radius: 7px;margin-bottom: 20px;" data-w-id="e062f3ce-a49a-626a-d00d-8d5bc5ae6fee" alt=""/>
+                          </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </header>
+            <section class="section_icons">
+               <div class="padding-global">
+                  <div class="container-large">
+                     <div class="padding-section-small">
+                        <div class="w-layout-grid icons_component">
+                           <div id="w-node-_9803b09d-9ccd-fb64-569b-b34901eb1e11-f0970e06" data-w-id="9803b09d-9ccd-fb64-569b-b34901eb1e11" class="icons_item">
+                              <div class="icons_item-icon-wrapper">
+                                 <div class="icon-embed-small w-embed">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" class="bi bi-lightning" viewBox="0 0 16 16">
+                                       <path d="M5.52.359A.5.5 0 0 1 6 0h4a.5.5 0 0 1 .474.658L8.694 6H12.5a.5.5 0 0 1 .395.807l-7 9a.5.5 0 0 1-.873-.454L6.823 9.5H3.5a.5.5 0 0 1-.48-.641zM6.374 1 4.168 8.5H7.5a.5.5 0 0 1 .478.647L6.78 13.04 11.478 7H8a.5.5 0 0 1-.474-.658L9.306 1z"/>
+                                     </svg>
+                                 </div>
+                              </div>
+                              <div class="icons_item-text-wrapper">
+                                 <div class="text-size-large">Lightning-Fast Response Time</div>
+                              </div>
+                           </div>
+                           <div id="w-node-e9d13643-6d11-8ace-31cb-69bd7e282b40-f0970e06" data-w-id="e9d13643-6d11-8ace-31cb-69bd7e282b40" style="opacity:0" class="icons_item">
+                              <div class="icons_item-icon-wrapper">
+                                 <div class="icon-embed-small w-embed">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                                       <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z"/>
+                                       <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.012-.013.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5M8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3"/>
+                                     </svg>
+                                 </div>
+                              </div>
+                              <div class="icons_item-text-wrapper">
+                                 <div class="text-size-large">Instant Deployment and Onboarding</div>
+                              </div>
+                           </div>
+                           <div id="w-node-_8ac5bfdd-3058-ca3d-ad2a-d435bb6d94e9-f0970e06" data-w-id="8ac5bfdd-3058-ca3d-ad2a-d435bb6d94e9" style="opacity:0" class="icons_item">
+                              <div class="icons_item-icon-wrapper">
+                                 <div class="icon-embed-small w-embed">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" class="bi bi-magnet" viewBox="0 0 16 16">
+                                       <path d="M8 1a7 7 0 0 0-7 7v3h4V8a3 3 0 0 1 6 0v3h4V8a7 7 0 0 0-7-7m7 11h-4v3h4zM5 12H1v3h4zM0 8a8 8 0 1 1 16 0v8h-6V8a2 2 0 1 0-4 0v8H0z"/>
+                                     </svg>
+                                 </div>
+                              </div>
+                              <div class="icons_item-text-wrapper">
+                                 <div class="text-size-large">Rapid Lead Generation</div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <section class="section_first">
+               <div class="padding-global">
+                  <div class="container-large">
+                     <div class="padding-section-large">
+                        <div class="w-layout-grid first_component">
+                           <div id="w-node-_3ada23fb-6b90-4e36-7463-00701e26be97-f0970e06" class="first_image-wrapper"><img src="https://assets.website-files.com/63b7f5978640f802b3970e23/63b7fa3d85c7d8134e9400ee_counter-02.svg" loading="lazy" alt="" class="chart_image"/><img src="https://assets.website-files.com/63b7f5978640f802b3970e23/63b7fa3c35544c702cc45c9e_counter-shape-01.svg" loading="lazy" style="opacity:0" data-w-id="6035d891-7c85-30c1-3150-38416bd454b9" alt="" class="first_floater"/></div>
+                           <div id="w-node-_3ada23fb-6b90-4e36-7463-00701e26be99-f0970e06" class="first_content">
+                              <div class="margin-bottom margin-small">
+                                 <h2>Get Insights and Make Data-Driven Decisions</h2>
+                              </div>
+                              <p class="text-size-medium text-style-muted">Our metrics dashboard gives you the ability to dive deep into your business&#x27;s data, uncovering insights and trends that would otherwise go unnoticed. Armed with this knowledge, you can make more informed, data-driven decisions that will drive your business forward.</p>
+                              <div class="margin-top margin-medium">
+                                 <div class="button-group">
+                                    <a href="#" class="button is-secondary is-small w-button">Start Free Trial</a>
+                                    <a href="#" class="button is-link is-icon w-inline-block">
+                                       <div>Contact Sales</div>
+                                       <div class="icon-embed-xxsmall w-embed">
+                                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                             <path d="M6 3L11 8L6 13" stroke="CurrentColor" stroke-width="1.5"/>
+                                          </svg>
+                                       </div>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <section class="section_second">
+               <div class="padding-global">
+                  <div class="container-large">
+                     <div class="padding-section-large">
+                        <div class="w-layout-grid second_component">
+                           <div class="second_content">
+                              <div class="margin-bottom margin-small">
+                                 <h2>Track the widest range of metrics</h2>
+                              </div>
+                              <div class="second_item-list">
+                                 <div id="w-node-_28c12711-59b0-c752-95b8-76374658bbe1-f0970e06" class="second_item">
+                                    <div class="checkmark-wrapper">
+                                       <div class="icon-embed-xsmall w-embed">
+                                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                             <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                             <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                    <div class="second_item-text-wrapper">
+                                       <p class="text-style-muted">We track a wide range of metrics, giving you a complete picture of your business&#x27;s performance.</p>
+                                    </div>
+                                 </div>
+                                 <div id="w-node-c09f4732-20f7-5427-4624-f72ae0d06c93-f0970e06" class="second_item">
+                                    <div class="checkmark-wrapper">
+                                       <div class="icon-embed-xsmall w-embed">
+                                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                             <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                             <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                    <div class="second_item-text-wrapper">
+                                       <p class="text-style-muted">Our data is reliable and up-to-date, so you can trust the insights you&#x27;re getting.</p>
+                                    </div>
+                                 </div>
+                                 <div id="w-node-_6b600bc0-500f-2a10-7080-8bd028dc98a4-f0970e06" class="second_item">
+                                    <div class="checkmark-wrapper">
+                                       <div class="icon-embed-xsmall w-embed">
+                                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                             <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                             <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                    <div class="second_item-text-wrapper">
+                                       <p class="text-style-muted">Our intuitive interface and easy-to-understand reports make it simple for anyone to use.</p>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="margin-top margin-medium">
+                                 <div class="button-group">
+                                    <a href="#" class="button is-secondary is-small w-button">Start Free Trial</a>
+                                    <a href="#" class="button is-link is-icon w-inline-block">
+                                       <div>Contact Sales</div>
+                                       <div class="icon-embed-xxsmall w-embed">
+                                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                             <path d="M6 3L11 8L6 13" stroke="CurrentColor" stroke-width="1.5"/>
+                                          </svg>
+                                       </div>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="w-node-_28c12711-59b0-c752-95b8-76374658bbfb-f0970e06" class="second_image-wrapper"><img src="https://assets.website-files.com/63b7f5978640f802b3970e23/63b7f83335544ca4c1c43a67_counter-01.svg" loading="lazy" alt="" class="chart_image"/><img src="https://assets.website-files.com/63b7f5978640f802b3970e23/63b7fa3cae9e36f40c3edaca_counter-shape-02.svg" loading="lazy" style="opacity:0" data-w-id="d6cd8af5-cfc1-7b19-af29-e2c712968175" alt="" class="second_floater"/></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <section class="section_third">
+               <div class="padding-global">
+                  <div class="container-large">
+                     <div class="padding-section-large">
+                        <div class="w-layout-grid third_component">
+                           <div id="w-node-_8add2b10-27e2-79b8-c51c-1497cd7f2964-f0970e06" class="third_image-wrapper"><img src="https://assets.website-files.com/63b7f5978640f802b3970e23/63b7fa3de4a1611a19e7271a_counter-03.svg" loading="lazy" alt="" class="chart_image"/><img src="https://assets.website-files.com/63b7f5978640f802b3970e23/63b7fa3c35544c702cc45c9e_counter-shape-01.svg" loading="lazy" style="opacity:0" data-w-id="ec17092b-fce7-7226-078e-7fad69b91529" alt="" class="third_floater"/></div>
+                           <div id="w-node-_8add2b10-27e2-79b8-c51c-1497cd7f2966-f0970e06" class="third_content">
+                              <div class="margin-bottom margin-small">
+                                 <h2>Collaborate with Your Team</h2>
+                              </div>
+                              <div class="margin-bottom margin-small">
+                                 <p class="text-size-medium text-style-muted">You can invite team members to view and contribute to your dashboard, allowing for more efficient and effective decision-making. </p>
+                              </div>
+                              <div class="margin-top margin-medium">
+                                 <div class="button-group">
+                                    <a href="#" class="button is-secondary is-small w-button">Start Free Trial</a>
+                                    <a href="#" class="button is-link is-icon w-inline-block">
+                                       <div>Contact Sales</div>
+                                       <div class="icon-embed-xxsmall w-embed">
+                                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                             <path d="M6 3L11 8L6 13" stroke="CurrentColor" stroke-width="1.5"/>
+                                          </svg>
+                                       </div>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <section class="section_testimonials">
+               <div class="padding-global">
+                  <div class="container-large">
+                     <div class="padding-section-large">
+                        <div class="testimonials_component">
+                           <div class="margin-bottom margin-xxlarge">
+                              <div class="text-align-center">
+                                 <div class="max-width-large">
+                                    <div class="margin-bottom margin-small">
+                                       <h2>Trusted by Leaders</h2>
+                                    </div>
+                                    <p class="text-size-medium">Our metrics dashboard has already helped countless businesses improve their performance and achieve their goals. Here&#x27;s what some of our happy customers have to say:</p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="max-width-large">
+                              <div class="w-layout-grid testimonials_list">
+                                 <div data-w-id="002f533f-cf40-b18d-86e0-26261af24952" style="opacity:0" class="testimonials_item">
+                                    <div class="margin-bottom margin-small">
+                                       <div class="testimonials_image-wrapper"><img src="https://assets.website-files.com/63b7f5978640f802b3970e23/63b8328600cc286484704c28_testimonial-image-1-1-min.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 43vw, 368px" srcset="https://assets.website-files.com/63b7f5978640f802b3970e23/63b8328600cc286484704c28_testimonial-image-1-1-min-p-500.jpg 500w, https://assets.website-files.com/63b7f5978640f802b3970e23/63b8328600cc286484704c28_testimonial-image-1-1-min-p-800.jpg 800w, https://assets.website-files.com/63b7f5978640f802b3970e23/63b8328600cc286484704c28_testimonial-image-1-1-min.jpg 800w" alt="" class="testimonials_image"/></div>
+                                    </div>
+                                    <div class="margin-bottom margin-xsmall">
+                                       <div class="text-size-large text-weight-medium">&quot;Since implementing Counting we&#x27;ve been able to identify areas for improvement and make data-driven decisions that have had a big impact.</div>
+                                    </div>
+                                    <p class="text-weight-medium">Celena Jennifer</p>
+                                    <p class="text-style-muted">CEO — Acne Studios</p>
+                                 </div>
+                                 <div data-w-id="3eff2dd5-9521-e03f-5420-23dc062c97ca" style="opacity:0" class="testimonials_item">
+                                    <div class="margin-bottom margin-small">
+                                       <div class="testimonials_image-wrapper"><img src="https://assets.website-files.com/63b7f5978640f802b3970e23/63b832866aeee02c42e86da2_testimonial-image-1-min.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 43vw, 368px" srcset="https://assets.website-files.com/63b7f5978640f802b3970e23/63b832866aeee02c42e86da2_testimonial-image-1-min-p-500.jpg 500w, https://assets.website-files.com/63b7f5978640f802b3970e23/63b832866aeee02c42e86da2_testimonial-image-1-min-p-800.jpg 800w, https://assets.website-files.com/63b7f5978640f802b3970e23/63b832866aeee02c42e86da2_testimonial-image-1-min.jpg 800w" alt="" class="testimonials_image"/></div>
+                                    </div>
+                                    <div class="margin-bottom margin-xsmall">
+                                       <div class="text-size-large text-weight-medium">The metrics dashboard has made it easy for us to track our key performance indicators and make informed decisions about the direction of our business.&quot;</div>
+                                    </div>
+                                    <p class="text-weight-medium">George Jackson</p>
+                                    <p class="text-style-muted">CTO — Acne Studios</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <section class="section_pricing">
+               <div class="padding-global">
+                  <div class="container-medium">
+                     <div class="padding-section-large">
+                        <div class="margin-bottom margin-xxlarge">
+                           <div class="text-align-center">
+                              <div class="max-width-large align-center">
+                                 <div class="margin-bottom margin-small">
+                                    <h2>Pricing plan</h2>
+                                 </div>
+                                 <p class="text-size-medium text-style-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="w-layout-grid pricing_component">
+                           <div data-w-id="2ec28f67-7db9-1e73-b5b9-b557622c7692" style="opacity:0" class="pricing_plan">
+                              <div class="pricing_content">
+                                 <div class="margin-bottom margin-tiny">
+                                    <div class="heading-style-h6">Basic plan</div>
+                                 </div>
+                                 <div>Lorem ipsum dolor sit amet</div>
+                                 <div class="margin-vertical margin-xxsmall">
+                                    <div class="heading-style-h1">$35<span class="heading-medium">/mo</span></div>
+                                 </div>
+                                 <div class="text-style-muted">or $199 yearly</div>
+                                 <div class="margin-top margin-medium"><a href="#" class="button is-secondary max-width-full w-button">Start Free Trial</a></div>
+                                 <div class="pricing_divider"></div>
+                                 <div class="pricing_feature-list">
+                                    <div id="w-node-_2ec28f67-7db9-1e73-b5b9-b557622c76a6-f0970e06" class="pricing_feature">
+                                       <div class="checkmark-wrapper">
+                                          <div class="icon-embed-xsmall w-embed">
+                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                                <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                                <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                             </svg>
+                                          </div>
+                                       </div>
+                                       <div>Feature text goes here</div>
+                                    </div>
+                                    <div id="w-node-c709e7ff-d833-c8ef-e01d-d6095e9b492a-f0970e06" class="pricing_feature">
+                                       <div class="checkmark-wrapper">
+                                          <div class="icon-embed-xsmall w-embed">
+                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                                <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                                <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                             </svg>
+                                          </div>
+                                       </div>
+                                       <div>Feature text goes here</div>
+                                    </div>
+                                    <div id="w-node-_4cc55a5c-c7a4-00db-47e3-024a8423701d-f0970e06" class="pricing_feature">
+                                       <div class="checkmark-wrapper">
+                                          <div class="icon-embed-xsmall w-embed">
+                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                                <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                                <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                             </svg>
+                                          </div>
+                                       </div>
+                                       <div>Feature text goes here</div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div data-w-id="2ec28f67-7db9-1e73-b5b9-b557622c76b5" style="opacity:0" class="pricing_plan is-middle">
+                              <div class="pricing_content">
+                                 <div class="margin-bottom margin-tiny">
+                                    <div class="heading-style-h6">Business plan</div>
+                                 </div>
+                                 <div>Lorem ipsum dolor sit amet</div>
+                                 <div class="margin-vertical margin-xxsmall">
+                                    <div class="heading-style-h1">$45<span class="heading-medium">/mo</span></div>
+                                 </div>
+                                 <div class="text-style-muted">or $299 yearly</div>
+                                 <div class="margin-top margin-medium"><a href="#" class="button max-width-full w-button">Start Free Trial</a></div>
+                                 <div class="pricing_divider"></div>
+                              </div>
+                              <div class="pricing_feature-list">
+                                 <div id="w-node-_4e688a82-6867-63d2-2f4c-6ba7846c5808-f0970e06" class="pricing_feature">
+                                    <div class="checkmark-wrapper">
+                                       <div class="icon-embed-xsmall w-embed">
+                                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                             <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                             <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                    <div>Feature text goes here</div>
+                                 </div>
+                                 <div id="w-node-_4e688a82-6867-63d2-2f4c-6ba7846c580d-f0970e06" class="pricing_feature">
+                                    <div class="checkmark-wrapper">
+                                       <div class="icon-embed-xsmall w-embed">
+                                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                             <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                             <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                    <div>Feature text goes here</div>
+                                 </div>
+                                 <div id="w-node-_4e688a82-6867-63d2-2f4c-6ba7846c5812-f0970e06" class="pricing_feature">
+                                    <div class="checkmark-wrapper">
+                                       <div class="icon-embed-xsmall w-embed">
+                                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                             <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                             <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                    <div>Feature text goes here</div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div data-w-id="2ec28f67-7db9-1e73-b5b9-b557622c76dd" style="opacity:0" class="pricing_plan">
+                              <div class="pricing_content">
+                                 <div class="margin-bottom margin-tiny">
+                                    <div class="heading-style-h6">Enterprise plan</div>
+                                 </div>
+                                 <div>Lorem ipsum dolor sit amet</div>
+                                 <div class="margin-vertical margin-xxsmall">
+                                    <div class="heading-style-h1">$55<span class="heading-medium">/mo</span></div>
+                                 </div>
+                                 <div class="text-style-muted">or $499 yearly</div>
+                                 <div class="margin-top margin-medium"><a href="#" class="button is-secondary max-width-full w-button">Start Free Trial</a></div>
+                                 <div class="pricing_divider"></div>
+                              </div>
+                              <div class="pricing_feature-list">
+                                 <div id="w-node-_0e84660e-16ae-8e88-ef84-7e92303d5758-f0970e06" class="pricing_feature">
+                                    <div class="checkmark-wrapper">
+                                       <div class="icon-embed-xsmall w-embed">
+                                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                             <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                             <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                    <div>Feature text goes here</div>
+                                 </div>
+                                 <div id="w-node-_0e84660e-16ae-8e88-ef84-7e92303d575d-f0970e06" class="pricing_feature">
+                                    <div class="checkmark-wrapper">
+                                       <div class="icon-embed-xsmall w-embed">
+                                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                             <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                             <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                    <div>Feature text goes here</div>
+                                 </div>
+                                 <div id="w-node-_0e84660e-16ae-8e88-ef84-7e92303d5762-f0970e06" class="pricing_feature">
+                                    <div class="checkmark-wrapper">
+                                       <div class="icon-embed-xsmall w-embed">
+                                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                             <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                             <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                    <div>Feature text goes here</div>
+                                 </div>
+                                 <div id="w-node-_3ea3e08d-7ec8-ab65-a40a-1c06e1124907-f0970e06" class="pricing_feature">
+                                    <div class="checkmark-wrapper">
+                                       <div class="icon-embed-xsmall w-embed">
+                                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                             <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                             <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                    <div>Feature text goes here</div>
+                                 </div>
+                                 <div id="w-node-_12dd3632-9013-467e-7ac4-e9fba3ec92a3-f0970e06" class="pricing_feature">
+                                    <div class="checkmark-wrapper">
+                                       <div class="icon-embed-xsmall w-embed">
+                                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                             <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm-2 19.59l-5-5L10.59 15L14 18.41L21.41 11l1.596 1.586Z"></path>
+                                             <path fill="none" d="m14 21.591l-5-5L10.591 15L14 18.409L21.41 11l1.595 1.585L14 21.591z"></path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                    <div>Feature text goes here</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <section class="section_cta">
+               <div class="padding-global">
+                  <div class="container-large">
+                     <div class="padding-section-small">
+                        <div class="w-layout-grid cta_component">
+                           <div data-w-id="5b4431ea-fd00-b166-54e0-aa53fb142a64" style="opacity:0" class="cta_card">
+                              <div class="cta_content">
+                                 <div class="max-width-medium">
+                                    <h4 class="text-color-white">Unlock the power of your data</h4>
+                                 </div>
+                              </div>
+                              <div class="cta_button-row"><a href="#" class="button background-color-white w-button">Start Free Trial</a><a href="#" class="button w-button">Contact Sales</a></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <footer class="footer_component">
+               <div class="padding-global">
+                  <div class="container-large">
+                     <div class="padding-vertical padding-medium">
+                        <div class="padding-bottom padding-xlarge">
+                           <div class="w-layout-grid footer_top-wrapper">
+                              <div id="w-node-d064e372-9a8a-ce48-b764-39a68e59c316-f0970e06" class="footer_left-wrapper">
+                                 <a href="/" class="navigation_logo-link w-nav-brand" style="font-size: 1.7rem;font-weight: 600;color: #2b59ff;">swif<span style="color: #5CE1E6;">t</span>ech</a><br>
+                                 <div id="w-node-d064e372-9a8a-ce48-b764-39a68e59c319-f0970e06" class="w-layout-grid footer_link-list"><a href="#" class="footer_link">About</a><a href="#" class="footer_link">Blog</a><a href="#" class="footer_link">Metrics</a><a href="#" class="footer_link">Charts</a><a href="#" class="footer_link">Contact</a></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="line-divider"></div>
+                        <div class="padding-top padding-medium">
+                           <div class="footer_bottom-wrapper">
+                              <div class="w-layout-grid footer_legal-list"><a href="#" class="footer_legal-link">Privacy Policy</a><a href="#" class="footer_legal-link">Terms of Service</a><a href="#" class="footer_legal-link">Cookies Settings</a></div>
+                              <div class="footer_credit-text">© Free landing page by <a href="http://kickstartstudio.co" target="_blank">Kickstart Studio</a></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </footer>
+         </main>
+      </div>
+      <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=63b7f5978640f802b3970e23" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="https://assets.website-files.com/63b7f5978640f802b3970e23/js/webflow.fdedb8598.js" type="text/javascript"></script><!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+      <script>
+         document.querySelector("#prompt-form").addEventListener("submit", async () => {
+            const promptFormData = new FormData(document.querySelector("#prompt-form"))
+
+            console.log(promptFormData)
+
+            // Convert form data to JSON object
+            const promptData = {};
+            promptFormData.forEach((value, key) => {
+               promptData[key] = value;
+            });
+
+            console.log(promptData)
+
+            const postData = await axios
+            .post("/set_prompt", promptData).then(() => {
+               setTimeout(() => {
+                  document.querySelector("#prompt-form").style.display = "none";
+                  document.querySelector(".success-message").style.display = "block";
+               }, 1000)
+            })
+         })
+
+         document.querySelector("#set-default-prompt").onclick = function() {
+            console.log(document.querySelector("#set-default-prompt").checked)
+            if(document.querySelector("#set-default-prompt").checked == true) {
+               document.querySelector(".promptText").value = `As an outbound sales representative for an Ed-Tech firm, you help callers choose the right course for them. You provide thorough details about each option with a cheerful attitude, keeping responses concise to avoid overwhelming the caller. Your main focus is to assist callers in finding the perfect fit for their course needs.`
+            } else {
+               document.querySelector(".promptText").value = ``
+            }
+         }
+      </script>
+   </body>
 </html>
