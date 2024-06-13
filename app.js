@@ -20,9 +20,8 @@ const MongoDBSessionStore = require("connect-mongodb-session");
 var mongourl = process.env.MONGODB_URL;
 const mongoclient = new MongoClient(mongourl, {
   tls: true,
-  tlsAllowInvalidCertificates: true,
-  tlsAllowInvalidHostnames: true,
-  tlsCAFile: path.join(__dirname, 'mongodb-cert.pem')
+  tlsCAFile: path.join(__dirname, 'rds-combined-ca-bundle.pem'),
+  sslValidate: true
 });
 
 // Create a new MongoDBSessionStore
@@ -245,7 +244,7 @@ app.ws('/connection', (ws, req) => {
 
 mongoose.connect(mongourl)
 .then(async () => {
-  // console.log("Connected to MongoDB");
+  console.log("Connected to MongoDB");
   // const database = mongoclient.db(); // This will use the default database specified in the connection string
 
   // // Check if the "CallTrials" collection exists
