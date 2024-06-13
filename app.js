@@ -20,7 +20,12 @@ const MongoDBSessionStore = require("connect-mongodb-session");
 var mongourl = process.env.MONGODB_URL;
 const mongoclient = new MongoClient(mongourl, {
   tls: true,
-  tlsCAFile: path.join(__dirname, 'rds-combined-ca-bundle.pem')
+  tlsCAFile: path.join(__dirname, 'rds-combined-ca-bundle.pem'),
+  tlsInsecure: false,
+  tlsAllowInvalidCertificates: false,
+  tlsAllowInvalidHostnames: false,
+  useUnifiedTopology: true,
+  useNewUrlParser: true
 });
 
 // Create a new MongoDBSessionStore
