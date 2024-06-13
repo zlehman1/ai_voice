@@ -231,7 +231,7 @@ expressWs.app.ws('/connection', (ws, req) => {
       //   socketService.sendData("This is a test")
       //   socketService.sendEosData()
       // }, 5000)
-      ttsService.generate({partialResponseIndex: null, partialResponse: "Hey, You remember me?"}, 1);
+      ttsService.generate({partialResponseIndex: null, partialResponse: "Hey, how can I assist you?"}, 1);
     } else if (msg.event === 'media') {
       transcriptionService.send(msg.media.payload);
     } else if (msg.event === 'mark') {
