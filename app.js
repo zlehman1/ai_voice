@@ -18,7 +18,12 @@ const {TextToSpeechWebSocket} = require("./services/tts-socket")
 
 const MongoDBSessionStore = require("connect-mongodb-session");
 var mongourl = process.env.MONGODB_URL;
-const mongoclient = new MongoClient(mongourl, { useNewUrlParser: true, useUnifiedTopology: true });
+const mongoclient = new MongoClient(mongourl, {
+  tls: true,
+  tlsAllowInvalidCertificates: true,
+  tlsAllowInvalidHostnames: true,
+  tlsCAFile: path.join(__dirname, 'mongodb-cert.pem')
+});
 
 // Create a new MongoDBSessionStore
 const MongoDBStore = MongoDBSessionStore(session);
@@ -37,6 +42,7 @@ store.on("error", function (error) {
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const app = express();
+const expressWs = ExpressWs(app);
 
 // Middleware for parsing request body
 app.use(express.json());
@@ -154,7 +160,7 @@ app.get('/test', (req, res) => {
 
 app.engine('html', require('ejs').renderFile);
 
-expressWs.app.ws('/connection', (ws, req) => {
+app.ws('/connection', (ws, req) => {
   console.log("Connected...")
   ws.on('error', console.error);
   // Filled in from start message
