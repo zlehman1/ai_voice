@@ -15,10 +15,15 @@ const { StreamService } = require('./services/stream-service');
 const { TranscriptionService } = require('./services/transcription-service');
 const { TextToSpeechService } = require('./services/tts-service');
 const {TextToSpeechWebSocket} = require("./services/tts-socket")
+const waitlistDB = require("./models/waitlistModel");
 
 const MongoDBSessionStore = require("connect-mongodb-session");
 var mongourl = process.env.MONGODB_URL;
-const mongoclient = new MongoClient(mongourl, { useNewUrlParser: true, useUnifiedTopology: true });
+const mongoclient = new MongoClient(mongourl, {
+  tls: true,
+  tlsCAFile: path.join(__dirname, 'rds-combined-ca-bundle.pem'),
+  tlsAllowInvalidHostnames: true // Temporarily allowing invalid hostnames for testing
+});
 
 // Create a new MongoDBSessionStore
 const MongoDBStore = MongoDBSessionStore(session);
@@ -37,6 +42,7 @@ store.on("error", function (error) {
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const app = express();
+const expressWs = ExpressWs(app);
 
 // Middleware for parsing request body
 app.use(express.json());
@@ -74,7 +80,7 @@ function makeACall(toNumber) {
   </Response>`,
   to: toNumber,
   from: process.env.FROM_NUMBER,
-  // record: true
+  record: true
 });
 console.log("Call successfully made: ", calls)
 }
@@ -152,9 +158,53 @@ app.get('/test', (req, res) => {
   res.send("Hello!");
 });
 
+app.get("/join-waitlist", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'templates', 'waitlist.html'));
+})
+
+// Route to save a User
+app.post("/add-waitlist-member", async (request, response) => {
+  try {
+    if (
+      !request.body.name ||
+      !request.body.company ||
+      !request.body.email
+    ) {
+      return response.status(400).send({
+        message: "Invalid input",
+      });
+    }
+      const newMember = {
+        name: request.body.name,
+        company: request.body.company,
+        email: request.body.email,
+        phone: request.body.phone,
+      };
+
+      const createWaitlistMember = await waitlistDB.create(newMember);
+
+      return response
+        .status(201)
+        .send({ message: "Member successfully added to the waitlist" });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+app.get("/getallwaitlistmembers", async (request, response) => {
+  const users = await waitlistDB.find();
+  response.json(users);
+});
+
+app.get("/deleteallwaitlistmembers", async (request, response) => {
+  const users = await waitlistDB.deleteMany({});
+  response.json(users);
+});
+
 app.engine('html', require('ejs').renderFile);
 
-expressWs.app.ws('/connection', (ws, req) => {
+app.ws('/connection', (ws, req) => {
   console.log("Connected...")
   ws.on('error', console.error);
   // Filled in from start message
@@ -184,7 +234,7 @@ expressWs.app.ws('/connection', (ws, req) => {
       //   socketService.sendData("This is a test")
       //   socketService.sendEosData()
       // }, 5000)
-      ttsService.generate({partialResponseIndex: null, partialResponse: "Hello! how can I assist you?"}, 1);
+      ttsService.generate({partialResponseIndex: null, partialResponse: "Hey, how can I assist you?"}, 1);
     } else if (msg.event === 'media') {
       transcriptionService.send(msg.media.payload);
     } else if (msg.event === 'mark') {
@@ -239,7 +289,7 @@ expressWs.app.ws('/connection', (ws, req) => {
 
 mongoose.connect(mongourl)
 .then(async () => {
-  // console.log("Connected to MongoDB");
+  console.log("Connected to MongoDB");
   // const database = mongoclient.db(); // This will use the default database specified in the connection string
 
   // // Check if the "CallTrials" collection exists

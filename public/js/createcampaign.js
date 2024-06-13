@@ -159,9 +159,9 @@ function updateFileName() {
       return false
     }
   
-    if(arrData.length <= 20) {
+    if(arrData.length <= 1) {
       // throw minimum limit error
-      showNotificationFunction("danger","times-circle","true","Insufficient CSV Size","The uploaded CSV must contain more than 20 rows. Please upload a CSV file with an adequate number of rows.")
+      showNotificationFunction("danger","times-circle","true","Insufficient CSV Size","The uploaded CSV must contain more than 1 rows. Please upload a CSV file with an adequate number of rows.")
       return false
     }
   
