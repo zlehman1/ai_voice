@@ -57,9 +57,9 @@ passport.use(
         const user = await User.findOne({ email });
         try {
           if (!user) return done(null, false);
-  
+
           if (user.password !== password) return done(null, false);
-  
+
           return done(null, user);
         } catch (error) {
           console.log("Error")
@@ -168,35 +168,6 @@ router.post('/sign-in', passport.authenticate('local', { failureRedirect: '/' })
   res.send(true)
 	// res.redirect('/accounts/protected');
 });
-
-//Handling user login
-router.post("/sign-in", async function (request, response) {
-  console.log(request.body.email);
-  console.log(request.body.password);
-  try {
-    if (!request.body.email || !request.body.password) {
-      return response.send(400).send({
-        message: "All fields are required.",
-      });
-    }
-    const user = await User.findOne({ email: request.body.email });
-    if (user) {
-      const result = request.body.password === user.password;
-      if (result) {
-        request.session.user = user;
-
-        response.status(201).send({ message: "Successfully logged in" });
-      } else {
-        response.status(400).send({ message: "Password does not match" });
-      }
-    } else {
-      response.status(400).send({ message: "User does not exist" });
-    }
-  } catch (error) {
-    response.status(500).json({ message: error.message });
-  }
-});
-
 
 router.get("/getallusers", async (request, response) => {
   const users = await User.find();
