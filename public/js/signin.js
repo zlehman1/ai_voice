@@ -16,13 +16,13 @@ document
     axios
       .post("/api/signIn", userData)
       .then((response) => {
-        console.log(response)
-        // console.log(response.data);
-        if (response.data === true) {
-          console.log("True")
-          window.location.href = "/panel/campaigns"
+        console.log(response);
+        // Check for success message in the response
+        if (response.data.message === "Successfully logged in") {
+          console.log("True");
+          window.location.href = "/panel/campaigns";
         } else {
-            console.log("Invalid Email or Password")
+          console.log("Invalid Email or Password");
         }
       })
       .catch((error) => {
