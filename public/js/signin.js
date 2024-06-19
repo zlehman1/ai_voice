@@ -14,7 +14,7 @@ document
 
     // Send POST request to the server using Axios
     axios
-      .post("/accounts/sign-in", userData)
+      .post("/api/signIn", userData)
       .then((response) => {
         console.log(response)
         // console.log(response.data);
