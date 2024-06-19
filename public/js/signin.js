@@ -27,6 +27,10 @@ document
       })
       .catch((error) => {
         // Handle error
-        console.error("Error:", error.response.data.message);
+        if (error.response && error.response.data) {
+          console.error("Error:", error.response.data.message);
+        } else {
+          console.error("Error:", error.message || error);
+        }
       });
   });
