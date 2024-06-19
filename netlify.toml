@@ -1,7 +1,7 @@
 [build]
   publish = "public"
   command = "npm run build"
-  environment = { MONGODB_URL = "${MONGODB_ATLAS_PRIVATE_API_KEY}" }
+  environment = { MONGODB_URL = "${MONGODB_URL}" }
 
 [[redirects]]
   from = "/api/*"
