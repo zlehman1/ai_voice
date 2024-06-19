@@ -9,7 +9,7 @@
     "test": "jest",
     "dev": "nodemon app.js",
     "start": "node app.js",
-    "build": "npm install"
+    "build": "npm install && cp -r functions/. .netlify/functions/ && export MONGODB_URL=${MONGODB_ATLAS_PRIVATE_API_KEY_MONGODB_ATLAS_PRIVATE_API_KEY}"
   },
   "keywords": [],
   "author": "Charlie Weems",
