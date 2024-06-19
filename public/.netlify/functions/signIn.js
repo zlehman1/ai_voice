@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const User = require("../../../models/userModel");
 require('dotenv').config();
 
-const mongourl = process.env.MONGODB_ATLAS_PRIVATE_API_KEY_MONGODB_ATLAS_PRIVATE_API_KEY;
+const mongourl = process.env.MONGODB_URL;
 
 if (!mongourl.startsWith("mongodb://") && !mongourl.startsWith("mongodb+srv://")) {
   console.error("Invalid MongoDB connection string:", mongourl);
