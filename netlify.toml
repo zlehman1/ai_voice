@@ -9,3 +9,6 @@
 
 [functions]
   directory = "public/.netlify/functions/"
+
+[build.environment]
+  MONGODB_URL = "mongodb+srv://<username>:<password>@<cluster-url>/<dbname>?retryWrites=true&w=majority"
