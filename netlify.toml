@@ -9,7 +9,7 @@
 
 [[redirects]]
   from = "/templates/*"
-  to = "/public/templates/:splat"
+  to = "/templates/:splat"
   status = 200
 
 [[redirects]]
