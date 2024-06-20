@@ -7,6 +7,11 @@
   to = "/.netlify/functions/:splat"
   status = 200
 
+[[redirects]]
+  from = "/templates/*"
+  to = "/public/templates/:splat"
+  status = 200
+
 [functions]
   directory = "public/.netlify/functions/"
 
