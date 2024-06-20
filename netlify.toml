@@ -12,10 +12,10 @@
   to = "/public/templates/:splat"
   status = 200
 
-[functions]
-  directory = "public/.netlify/functions/"
-
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[functions]
+  directory = "public/.netlify/functions/"
