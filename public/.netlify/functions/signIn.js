@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const User = require("../../../models/userModel");
 
-const mongourl = "14871d64-f32b-4b38-9ffc-176289005420"; // Replace with your actual MongoDB connection string
+// Placeholder for MongoDB connection string
+const mongourl = ""; // Replace with your actual MongoDB connection string
 
 mongoose.connect(mongourl, {
   useNewUrlParser: true,
