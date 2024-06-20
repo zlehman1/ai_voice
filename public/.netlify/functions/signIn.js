@@ -1,64 +1,36 @@
-const mongoose = require("mongoose");
-const User = require("../../../models/userModel");
-require('dotenv').config();
+document
+  .querySelector(".signinform")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission
 
-const mongourl = process.env.MONGODB_URL;
+    // Get form data
+    const formData = new FormData(this);
 
-if (!mongourl.startsWith("mongodb://") && !mongourl.startsWith("mongodb+srv://")) {
-  console.error("Invalid MongoDB connection string:", mongourl);
-  throw new Error("Invalid MongoDB connection string");
-}
+    // Convert form data to JSON object
+    const userData = {};
+    formData.forEach((value, key) => {
+      userData[key] = value;
+    });
 
-mongoose.connect(mongourl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("Connected to MongoDB"))
-.catch((error) => console.error("Error connecting to MongoDB:", error));
-
-exports.handler = async (event, context) => {
-  console.log("Handler invoked");
-  const { email, password } = JSON.parse(event.body);
-  console.log("Request body parsed:", { email, password });
-
-  if (!email || !password) {
-    console.log("Missing fields");
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ message: "All fields are required." }),
-    };
-  }
-
-  try {
-    const user = await User.findOne({ email });
-    console.log("User found:", user);
-    if (user) {
-      const result = password === user.password;
-      if (result) {
-        console.log("Password match");
-        return {
-          statusCode: 200,
-          body: JSON.stringify({ message: "Successfully logged in" }),
-        };
-      } else {
-        console.log("Password does not match");
-        return {
-          statusCode: 400,
-          body: JSON.stringify({ message: "Password does not match" }),
-        };
-      }
-    } else {
-      console.log("User does not exist");
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ message: "User does not exist" }),
-      };
-    }
-  } catch (error) {
-    console.error("Error during sign-in:", error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: error.message }),
-    };
-  }
-};
+    // Send POST request to the server using Axios
+    axios
+      .post("/api/signIn", userData)
+      .then((response) => {
+        console.log(response);
+        // Check for success message in the response
+        if (response.data.message === "Successfully logged in") {
+          console.log("True");
+          window.location.href = "/panel/campaigns";
+        } else {
+          console.log("Invalid Email or Password");
+        }
+      })
+      .catch((error) => {
+        // Handle error
+        if (error.response && error.response.data) {
+          console.error("Error:", error.response.data.message);
+        } else {
+          console.error("Error:", error.message || error);
+        }
+      });
+  });
