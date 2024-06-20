@@ -1,13 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../../../models/userModel");
-require('dotenv').config();
 
 const mongourl = process.env.MONGODB_URL;
-
-if (!mongourl.startsWith("mongodb://") && !mongourl.startsWith("mongodb+srv://")) {
-  console.error("Invalid MongoDB connection string:", mongourl);
-  throw new Error("Invalid MongoDB connection string");
-}
 
 mongoose.connect(mongourl, {
   useNewUrlParser: true,
