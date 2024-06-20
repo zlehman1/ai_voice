@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../../../models/userModel");
 
-const mongourl = process.env.MONGODB_URL;
+const mongourl = "mongodb+srv://username:password@cluster0.mongodb.net/mydatabase?retryWrites=true&w=majority";
 
 mongoose.connect(mongourl, {
   useNewUrlParser: true,
