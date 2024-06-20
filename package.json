@@ -9,7 +9,7 @@
     "test": "jest",
     "dev": "nodemon app.js",
     "start": "node app.js",
-    "build": "cp -r functions/. public/.netlify/functions/"
+    "build": "cp -r functions/. public/.netlify/functions/ && cp -r templates/. public/templates/"
   },
   "keywords": [],
   "author": "Charlie Weems",

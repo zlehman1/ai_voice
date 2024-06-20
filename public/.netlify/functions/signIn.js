@@ -1,34 +1,20 @@
 const mongoose = require("mongoose");
 const User = require("../../../models/userModel");
+require('dotenv').config();
 
 const mongourl = process.env.MONGODB_URL;
 
-if (mongourl) {
-  if (!mongourl.startsWith("mongodb://") && !mongourl.startsWith("mongodb+srv://")) {
-    console.error("Invalid MongoDB connection string:", mongourl);
-    throw new Error("Invalid MongoDB connection string");
-  }
-
-  mongoose.connect(mongourl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => console.error("Error connecting to MongoDB:", error));
-} else {
-  console.warn("MONGODB_URL environment variable is not set. Skipping MongoDB connection.");
+if (!mongourl.startsWith("mongodb://") && !mongourl.startsWith("mongodb+srv://")) {
+  console.error("Invalid MongoDB connection string:", mongourl);
+  throw new Error("Invalid MongoDB connection string");
 }
 
-// Mocking User.findOne for local testing
-if (!mongourl) {
-  User.findOne = async ({ email }) => {
-    console.log("Mock User.findOne called with email:", email);
-    if (email === "test@example.com") {
-      return { email: "test@example.com", password: "password" }; // Mock user data
-    }
-    return null;
-  };
-}
+mongoose.connect(mongourl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("Connected to MongoDB"))
+.catch((error) => console.error("Error connecting to MongoDB:", error));
 
 exports.handler = async (event, context) => {
   console.log("Handler invoked");
